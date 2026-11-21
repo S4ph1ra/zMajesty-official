@@ -51,6 +51,6 @@ const FIREBASE_CONFIG = {
 
 // E-mails des 2 comptes admin (le site ne demande que le mot de passe).
 const ADMIN_EMAILS = {
-  'Leader': 'leader@zmajesty.com',
-  'Co-Leader': 'coleader@zmajesty.com'
+  'Leader': 'theodorik153@gmail.com',
+  'Co-Leader': 'loumig59@gmail.com'
 };
