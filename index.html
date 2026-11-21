@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1b2450">
+<title>👑 zMajesty Clan 👑</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="zMajesty">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false">☰ <span data-i18n="menu">Menu</span></button>
+<div class="overlay" id="overlay"></div>
+
+<aside class="sidebar" id="sidebar">
+  <h1>👑 zMajesty Clan</h1>
+  <nav>
+    <button data-nav="accueil" data-i18n="home"></button>
+    <button data-nav="membres" data-i18n="members"></button>
+    <button data-nav="galerie" data-i18n="gallery"></button>
+    <button data-nav="regles" data-i18n="rules"></button>
+    <button data-nav="evenements" data-i18n="events"></button>
+    <button data-nav="contact" data-i18n="contact"></button>
+  </nav>
+  <button class="btn btn-add install" id="installBtn" data-i18n="install" hidden></button>
+</aside>
+
+<main class="main">
+  <div class="container">
+    <header><h2 id="pageTitle"></h2></header>
+
+    <section id="accueil" class="section active">
+      <div class="frame"><button class="icon-btn admin-only frame-edit" data-edit-text="introTop" aria-label="✏️">✏️</button><p class="center pre" data-text="introTop"></p></div>
+      <div class="frame">
+        <button class="icon-btn admin-only frame-edit" data-edit-points aria-label="✏️">✏️</button>
+        <div class="progress-info" id="progressInfo"></div>
+        <div class="bar"><div class="bar-fill" id="progressBar"></div></div>
+        <div class="progress-text" id="progressText"></div>
+      </div>
+      <div class="frame"><button class="icon-btn admin-only frame-edit" data-edit-text="introBottom" aria-label="✏️">✏️</button><p class="center pre" data-text="introBottom"></p></div>
+    </section>
+
+    <section id="membres" class="section">
+      <div class="controls">
+        <div class="admin-status" id="statusText"></div>
+        <div class="btn-group">
+          <button class="btn btn-login" id="loginBtn" data-i18n="login"></button>
+          <button class="btn btn-logout" id="logoutBtn" data-i18n="logout" hidden></button>
+          <button class="btn btn-add admin-only" id="addMemberBtn" data-i18n="addMember"></button>
+        </div>
+      </div>
+      <input type="search" id="search" class="input" data-ph="search">
+      <div class="filters" id="statusFilters"></div>
+      <div class="grid" id="membersGrid"></div>
+      <p class="center muted" id="noResults" data-i18n="noResults" hidden></p>
+      <p class="center count" id="memberCount"></p>
+    </section>
+
+    <section id="galerie" class="section">
+      <div class="controls">
+        <div class="admin-status" id="galleryStatusText"></div>
+        <div class="btn-group"><button class="btn btn-add admin-only" id="addItemBtn" data-i18n="addItem"></button></div>
+      </div>
+      <div class="grid" id="galleryGrid"></div>
+      <p class="center muted" id="noGallery" data-i18n="noGallery" hidden></p>
+    </section>
+
+    <section id="regles" class="section"><div class="frame"><button class="icon-btn admin-only frame-edit" data-edit-text="rules" aria-label="✏️">✏️</button><p class="pre" data-text="rules"></p></div></section>
+    <section id="evenements" class="section"><div class="frame"><button class="icon-btn admin-only frame-edit" data-edit-text="events" aria-label="✏️">✏️</button><p class="pre" data-text="events"></p></div></section>
+    <section id="contact" class="section"><div class="frame"><button class="icon-btn admin-only frame-edit" data-edit-text="contact" aria-label="✏️">✏️</button><p class="pre" data-text="contact"></p></div></section>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="flags">
+    <button class="flag flag-fr" data-lang="fr" title="Français" aria-label="Français"></button>
+    <button class="flag flag-en" data-lang="en" title="English" aria-label="English"></button>
+    <button class="flag flag-es" data-lang="es" title="Español" aria-label="Español"></button>
+    <button class="flag flag-de" data-lang="de" title="Deutsch" aria-label="Deutsch"></button>
+    <button class="flag flag-it" data-lang="it" title="Italiano" aria-label="Italiano"></button>
+    <button class="flag flag-pt" data-lang="pt" title="Português" aria-label="Português"></button>
+    <button class="flag flag-br" data-lang="br" title="Português (Brasil)" aria-label="Português (Brasil)"></button>
+    <button class="flag flag-ru" data-lang="ru" title="Русский" aria-label="Русский"></button>
+    <button class="flag flag-jp" data-lang="jp" title="日本語" aria-label="日本語"></button>
+    <button class="flag flag-nl" data-lang="nl" title="Nederlands" aria-label="Nederlands"></button>
+    <button class="flag flag-zh" data-lang="zh" title="中文" aria-label="中文"></button>
+    <button class="flag flag-ko" data-lang="ko" title="한국어" aria-label="한국어"></button>
+    <button class="flag flag-ar" data-lang="ar" title="العربية" aria-label="العربية"></button>
+    <button class="flag flag-tr" data-lang="tr" title="Türkçe" aria-label="Türkçe"></button>
+    <button class="flag flag-pl" data-lang="pl" title="Polski" aria-label="Polski"></button>
+  </div>
+</footer>
+
+<!-- Modales -->
+<div class="modal" id="loginModal"><div class="modal-box">
+  <h2 data-i18n="loginTitle"></h2>
+  <form id="loginForm">
+    <div class="field"><label for="loginPassword" data-i18n="password"></label>
+      <input type="password" id="loginPassword" class="input" required autocomplete="current-password" data-ph="phPass"></div>
+    <div class="modal-btns">
+      <button type="submit" class="btn btn-add" data-i18n="validate"></button>
+      <button type="button" class="btn btn-logout" data-close data-i18n="cancel" style="display:inline-block"></button>
+    </div>
+  </form>
+</div></div>
+
+<div class="modal" id="memberModal"><div class="modal-box">
+  <h2 id="memberModalTitle"></h2>
+  <form id="memberForm">
+    <div class="field"><label for="memberPseudo" data-i18n="pseudo"></label>
+      <input type="text" id="memberPseudo" class="input" required maxlength="40" data-ph="phPseudo"></div>
+    <div class="field"><label for="memberGameRank" data-i18n="gameRank"></label>
+      <select id="memberGameRank" class="input" required>
+        <option>Novice</option><option>Apprenti</option><option>Aventurier</option><option>Expert</option>
+        <option>Maître</option><option>Grand Maître</option><option>Champion de la Nature</option><option>Esprit Sauvage</option>
+      </select></div>
+    <div class="field"><label for="memberClanRank" data-i18n="clanRank"></label>
+      <select id="memberClanRank" class="input" required></select></div>
+    <div class="field check" id="coLeaderGroup" hidden>
+      <input type="checkbox" id="canBeCoLeader"><label for="canBeCoLeader" data-i18n="canCo"></label></div>
+    <div class="field"><label data-i18n="languages"></label><div class="chips" id="memberLanguages"></div></div>
+    <div class="field"><label for="memberSocial" data-i18n="social"></label>
+      <input type="text" id="memberSocial" class="input" maxlength="100" data-ph="phSocial"></div>
+    <div class="field"><label for="memberStatus" data-i18n="status"></label>
+      <select id="memberStatus" class="input" required></select></div>
+    <div class="modal-btns">
+      <button type="submit" class="btn btn-add" data-i18n="validate"></button>
+      <button type="button" class="btn btn-logout" data-close data-i18n="cancel" style="display:inline-block"></button>
+    </div>
+  </form>
+</div></div>
+
+<div class="modal" id="galleryModal"><div class="modal-box">
+  <h2 data-i18n="addItemTitle"></h2>
+  <form id="galleryForm">
+    <div class="field"><label for="itemType" data-i18n="type"></label>
+      <select id="itemType" class="input" required>
+        <option value="image" data-i18n="typeImage"></option><option value="video" data-i18n="typeVideo"></option>
+      </select></div>
+    <div class="field"><label for="itemUrl" data-i18n="url"></label>
+      <input type="url" id="itemUrl" class="input" required maxlength="1000" data-ph="phUrl"></div>
+    <div class="field"><label for="itemDesc" data-i18n="description"></label>
+      <textarea id="itemDesc" class="input" rows="3" maxlength="300" data-ph="phDesc"></textarea></div>
+    <div class="modal-btns">
+      <button type="submit" class="btn btn-add" data-i18n="validate"></button>
+      <button type="button" class="btn btn-logout" data-close data-i18n="cancel" style="display:inline-block"></button>
+    </div>
+  </form>
+</div></div>
+
+<div class="modal" id="textModal"><div class="modal-box">
+  <h2 id="textTitle"></h2>
+  <form id="textForm">
+    <div class="field"><textarea id="textValue" class="input" rows="8" maxlength="2000"></textarea></div>
+    <div class="modal-btns">
+      <button type="submit" class="btn btn-add" data-i18n="validate"></button>
+      <button type="button" class="btn btn-logout" data-close data-i18n="cancel" style="display:inline-block"></button>
+    </div>
+  </form>
+</div></div>
+
+<div class="modal" id="pointsModal"><div class="modal-box">
+  <h2 data-i18n="pointsLabel"></h2>
+  <form id="pointsForm">
+    <div class="field"><label for="pointsValue" data-i18n="pointsLabel"></label>
+      <input type="number" id="pointsValue" class="input" min="0" step="1" required inputmode="numeric"></div>
+    <div class="field"><label for="maxPointsValue" data-i18n="maxPoints"></label>
+      <input type="number" id="maxPointsValue" class="input" min="1" step="1" required inputmode="numeric"></div>
+    <div class="modal-btns">
+      <button type="submit" class="btn btn-add" data-i18n="validate"></button>
+      <button type="button" class="btn btn-logout" data-close data-i18n="cancel" style="display:inline-block"></button>
+    </div>
+  </form>
+</div></div>
+
+<div class="modal lightbox" id="lightbox"><img id="lightboxImg" alt=""></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div id="particles" aria-hidden="true"></div>
+
+<!-- Firebase (base de données partagée + connexion admin) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js" crossorigin="anonymous"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js" crossorigin="anonymous"></script>
+<script src="firebase-config.js"></script>
+<script src="cloud.js"></script>
+<!-- Une langue = un fichier. Pour en ajouter : copier lang-fr.js, traduire, ajouter la ligne ici + un drapeau + le fichier dans sw.js -->
+<script src="lang-fr.js"></script>
+<script src="lang-en.js"></script>
+<script src="lang-es.js"></script>
+<script src="lang-de.js"></script>
+<script src="lang-it.js"></script>
+<script src="lang-pt.js"></script>
+<script src="lang-br.js"></script>
+<script src="lang-ru.js"></script>
+<script src="lang-jp.js"></script>
+<script src="lang-nl.js"></script>
+<script src="lang-zh.js"></script>
+<script src="lang-ko.js"></script>
+<script src="lang-ar.js"></script>
+<script src="lang-tr.js"></script>
+<script src="lang-pl.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
